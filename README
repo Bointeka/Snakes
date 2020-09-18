@@ -1,0 +1,27 @@
+Jeremy Okeyo
+8/11/2020
+
+What I learned
+Using javafx to create simple objects using the canvas.
+Simple animation using AnimationTimer
+Not everything needs to be visually represented within the application.
+        I.e the board as an 2D Array of chars
+        Allows for greater optimized code
+Never use git rm -rf 
+
+Mistakes
+Forgeting to initialize ArrayList
+Not thinking through the build of the application
+        Had to redo the implementation of the code
+
+Cell
+Represents the position and direction of individual cells. Useful in tracking
+the snakes position and movements as well as the food.
+
+Window
+Sets up the window using javafx and allows for the animation of snake.
+
+Game
+The game's main loop. Tracks keystrokes, status of the game as well as positions
+the snake's cell relative to each other and the food.
+
