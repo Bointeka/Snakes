@@ -1,18 +1,16 @@
 //Jeremy Okeyo
 //Keeps track of snake on
-import java.io.IOException;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.Scene;
-import java.util.Random;
-import javafx.scene.paint.Color;
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class game {
 	private Random rand = new Random();
-	private ArrayList<Cell> snake = new ArrayList<Cell>();
+	private ArrayList<Cell> snake = new ArrayList<>();
 	private int level;
 	private int length;
 	private int y = 2;
@@ -33,16 +31,6 @@ public class game {
 		}
 	}
 
-	//Used to create game from a load file
-	public game(Load file){
-		length = file.length;
-		level = file.level;
-		food = file.food;
-		for (int i = 0; i < length; i++) {
-			snake.add(file.snake.get(i));
-		}
-	}
-		
 	//Used to set new food location
 	public void setFood () {
 		food.setLoc(rand.nextInt(winSize),rand.nextInt(winSize));
@@ -60,11 +48,11 @@ public class game {
 		Cell last = snake.get(length - 1);
 		switch (last.getDir()) {
 			case 'u':
-				snake.add(new Cell(last.getX() + 1,last.getY(),
+				snake.add(new Cell(last.getX(),last.getY() - 1,
 							last.getDir()));
 				break;
 			case 'd':
-				snake.add(new Cell(last.getX(),last.getY() - 1,
+				snake.add(new Cell(last.getX(),last.getY() + 1,
 							last.getDir()));
 				break;
 			case 'l':
@@ -82,16 +70,12 @@ public class game {
 		return true;
 	}
 
-	public boolean validKey(KeyEvent e) throws IOException{
+	public boolean validKey(KeyEvent e) {
 		if (e.getCode() == KeyCode.ESCAPE) {
 			if (!pause)
 				pause = true;
 			else
 				pause = false;
-		}
-		if (e.getCode() == KeyCode.SPACE) {
-			Load file = new Load(level, length, food, snake);
-			gameOver = true;
 		}
 		switch (snake.get(0).getDir()) {
 			case 'u':
@@ -116,7 +100,7 @@ public class game {
 		return true;
 	}
 
-	public boolean gameLoop(GraphicsContext gc, Scene sc) {
+	public boolean gameLoop(GraphicsContext gc) {
 		gc.setFill(Color.RED);
 		printToScreen_F(gc, food);
 
